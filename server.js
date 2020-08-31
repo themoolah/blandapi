@@ -12,6 +12,11 @@ server.get('/', (req, res)=>{
     User.find().then(users=> res.status(200).send(users))
 })
 
+server.get('/:id', (req, res)=> {
+    const id = req.params.id;
+    User.findbyid(id).then(user=>res.status(200).send(user))
+})
+
 server.listen(PORT, ()=> {
     console.log(`Server is now active on localhost:${PORT}`)
 })
