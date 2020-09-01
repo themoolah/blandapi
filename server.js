@@ -9,7 +9,7 @@ const server = express();
 const PORT = process.env.PORT || 5000;
 
 server.get('/', (req, res)=>{
-    User.find().then(users=> res.status(200).send(users))
+    User.find('users').then(users=> res.status(200).send(users))
 })
 
 server.get('/:id', (req, res)=> {

@@ -2,8 +2,8 @@ const db = require('../db');
 
 
 
-function find(){
-    return db('users')
+function find(what){
+    return db(what)
 }
 
 function findbyid(id) {
