@@ -2,14 +2,19 @@ const db = require('../db');
 
 
 
-function find(what){
-    return db(what)
+function find(){
+    return db('users')
 }
 
-function findbyid(id) {
-    return db('users').where({id}).first()
+function insert(what){
+    return db('users').insert(what);
+}
+
+function findbyUsername(username) {
+    return db('users').where({username}).first()
 }
 module.exports = {
     find,
-    findbyid
+    findbyUsername,
+    insert
     }
