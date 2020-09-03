@@ -3,9 +3,14 @@ const express = require('express')
 let bcrypt = require('bcryptjs')
 let salt = bcrypt.genSaltSync(14);
 let bodyParser = require('body-parser')
+let jwt = require('jsonwebtoken')
+let generateToken = require('./utils/generateToken');
 
 //dabatase helpers
 const User = require('./data/dbhelpers');
+
+//jwt secret
+const secret = require('./utils/secrets')
 
 //set up server and port
 const server = express();
@@ -30,13 +35,14 @@ server.post('/login', (req, res)=> {
     User.findbyUsername(username)
         .then(user => {
             if(user && bcrypt.compareSync(password, user.password)) {
-                res.status(200).json({message: `Welcome ${user.username}!`})
+                const token = generateToken(user)
+                res.status(200).json({message: `Welcome ${user.username}! Here's your token:`, token})
             }
             else {
                 res.status(401).json({message: `Whoa there, chief. Something's wrong with your creds. I'm gonna need to see ID.`})
             }
         })
-        .catch(err=> res.json({error: error.message}))
+        .catch(err=> res.json({error: err.message}))
 })
 
 server.get('/:id', (req, res)=> {
