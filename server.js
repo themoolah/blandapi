@@ -14,7 +14,7 @@ function protected(req, res, next) {
     if (req.cookies.auth){
       next();
     } else {
-      res.status(401).json({ message: 'you shall not pass!!' });
+      res.status(401).json({ message: 'Nice try, omo olope.' });
     }
   }
 
