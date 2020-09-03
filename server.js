@@ -10,6 +10,13 @@ let token;
 //dabatase helpers
 const User = require('./data/dbhelpers');
 
+function protected(req, res, next) {
+    if (req.cookies.auth){
+      next();
+    } else {
+      res.status(401).json({ message: 'you shall not pass!!' });
+    }
+  }
 
 
 //set up server and port
@@ -19,16 +26,10 @@ server.use(cookieParser())
 const PORT = process.env.PORT || 5000;
 
 // Fetch users. To-do: protect this endpoint
-server.get('/', (req, res)=>{
-    if(res.cookie){
-        if(req.cookies.auth){
-    User.find().then(users=> res.status(200).json({users: users}))
-}else {
-    res.status(401).json({message: `You're not cleared for this.`})
-}
-} else {
-    res.status(401).json({message: `You shouldn't be here`})
-}
+server.get('/', protected, (req, res)=>{
+    User.find()
+    .then(users=> res.status(200).json({users: users}))
+    .catch(err=>res.status(404).json({message: err.message}))
 })
 
 //Registration endpoint
