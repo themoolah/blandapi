@@ -27,6 +27,7 @@ const PORT = process.env.PORT || 5000;
 
 // Fetch users. To-do: protect this endpoint
 server.get('/', protected, (req, res)=>{
+    console.log(res.cookies.bullshit)
     User.find()
     .then(users=> res.status(200).json({users: users}))
     .catch(err=>res.status(404).json({message: err.message}))
