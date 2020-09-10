@@ -12,7 +12,7 @@ function insert(what){
 }
 
 function findbyUsername(username) {
-    return db('users').where({username}).first().join("investments", "users.id", "=", "investments.user_id")
+    return db('users').where({username}).first()
 }
 module.exports = {
     find,
