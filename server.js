@@ -27,7 +27,7 @@ const PORT = process.env.PORT || 5000;
 
 // Fetch users. To-do: protect this endpoint
 server.get('/', protected, (req, res)=>{
-    console.log(res.cookies.bullshit)
+    console.log(res.rawListeners)
     User.find()
     .then(users=> res.status(200).json({users: users}))
     .catch(err=>res.status(404).json({message: err.message}))
@@ -48,7 +48,7 @@ server.post('/login', (req, res)=> {
             if(user && bcrypt.compareSync(password, user.password)) {
                 token = generateToken(user)
                 res.cookie('auth', token);
-                res.status(200).json({message: `Welcome ${user.username}! Here's your token:`, token})
+                res.status(200).json({data: user})
             }
             else {
                 res.status(401).json({message: `Whoa there, chief. Something's wrong with your creds. I'm gonna need to see ID.`})

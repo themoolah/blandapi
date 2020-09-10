@@ -8,7 +8,6 @@ module.exports = {
       filename: './data/moolahData.db3'
     }
   },
-  useNullAsDefault: true,
   pool: {
     afterCreate: (conn, done) => {
        conn.run('PRAGMA foreign_keys = ON', done);
@@ -17,6 +16,7 @@ module.exports = {
 },
 seeds: {
   directory: '../data/seeds'
-}
+},
+useNullAsDefault: true
 };
 
