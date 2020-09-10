@@ -3,7 +3,7 @@ const db = require('../db');
 
 
 function find(){
-    return db('users').join("investments", "users.id", "=", "investments.user_id")
+    return db('users')
 }
 
 
@@ -12,7 +12,7 @@ function insert(what){
 }
 
 function findbyUsername(username) {
-    return db('users').where({username}).first()
+    return db('users').where({username}).first().join("investments", "users.id", "=", "investments.user_id")
 }
 module.exports = {
     find,
