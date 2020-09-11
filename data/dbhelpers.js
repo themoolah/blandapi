@@ -6,7 +6,6 @@ function find(){
     return db('users')
 }
 
-
 function insert(what){
     return db('users').insert(what);
 }
