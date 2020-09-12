@@ -4,6 +4,7 @@ const db = require('../db');
 
 function find(){
     return db('users')
+        .join('investments', 'users.id', '=', 'investment.user_id')
 }
 
 function insert(what){
