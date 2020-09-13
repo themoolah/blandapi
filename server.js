@@ -41,6 +41,7 @@ server.post('/register', (req, res)=> {
     User.insert(req.body).then(users=> res.status(200).send(`Successfully added ${req.body.username}`))
 });
 
+//login endpoint
 server.post('/login', (req, res)=> {
     let {username, password} = req.body;
     User.findbyUsername(username)
