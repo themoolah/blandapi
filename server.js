@@ -36,6 +36,7 @@ server.get('/', protected, (req, res)=>{
 
 server.post('/dash', (req,res)=> {
     let id = req.body.id
+    console.log('the incoming id is', id)
     User.fetchUserCore(id)
         .then(user=> res.status(200).json({userData: user}))
         .catch(err=>res.status(404).json({fucked_up: err.message}))
