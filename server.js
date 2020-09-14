@@ -9,6 +9,7 @@ let token;
 
 //dabatase helpers
 const User = require('./data/dbhelpers');
+const { json } = require('body-parser');
 
 function protected(req, res, next) {
     if (req.cookies.auth){
@@ -31,6 +32,13 @@ server.get('/', protected, (req, res)=>{
     User.find()
     .then(users=> res.status(200).json({users: users}))
     .catch(err=>res.status(404).json({message: err.message}))
+})
+
+server.get('/dash', protected, (req,res)=> {
+    let id = req.body.id
+    User.fetchUserCore(id)
+        .then(user=> res.status(200).json({userData: user}))
+        .catch(err=>res.status(404).json({fucked_up: err.message}))
 })
 
 //Registration endpoint
