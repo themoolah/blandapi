@@ -4,7 +4,7 @@ const db = require('../db');
 
 function findbyUsername(username){
     return db('users')
-            .where({'users.username': 'vundie'})
+            .where(username)
 
 }
 
