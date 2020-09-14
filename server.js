@@ -34,7 +34,7 @@ server.get('/', protected, (req, res)=>{
     .catch(err=>res.status(404).json({message: err.message}))
 })
 
-server.get('/dash', protected, (req,res)=> {
+server.get('/dash', (req,res)=> {
     let id = req.body.id
     User.fetchUserCore(id)
         .then(user=> res.status(200).json({userData: user}))
