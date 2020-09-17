@@ -42,6 +42,15 @@ server.post('/dash', (req,res)=> {
         .catch(err=>res.status(404).json({fucked_up: err.message}))
 })
 
+server.post('/add', (req,res)=> {
+    let {id, category, ...payload} = req.body
+    User.addEntry(id, category, payload)
+        .then(results=>res.status(200).json({results: results}))
+        .catch(err=> res.status(400).json({failed_to_add: err.message}))
+    
+    
+})
+
 //Registration endpoint
 server.post('/register', (req, res)=> {
     console.log(req.body);

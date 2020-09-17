@@ -8,6 +8,13 @@ function findbyUsername(username){
 
 }
 
+function addEntry(id, category, payload){
+        db('users')
+            .insert(payload)
+            .into(category)
+            .where({'users.id': id})
+}
+
 function fetchUserCore(id) {
     return db('users')
     .join('wants', 'users.id', '=', 'wants.user_id')
@@ -26,5 +33,6 @@ module.exports = {
     find,
     findbyUsername,
     insert,
-    fetchUserCore
+    fetchUserCore,
+    addEntry
     }
