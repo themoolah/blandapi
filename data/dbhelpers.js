@@ -9,7 +9,7 @@ function findbyUsername(username){
 }
 
 function addEntry(id, category, payload){
-        db('users')
+        return db('users')
             .insert(payload)
             .into(category)
             .where({'users.id': id})
@@ -29,6 +29,9 @@ function insert(what){
 function find() {
     return db('users')
 }
+
+//to dos
+// 1. write function that adds entry and properly puts it in the wants, needs or investment cat
 module.exports = {
     find,
     findbyUsername,
